@@ -50,9 +50,9 @@ class ProstagesController extends AbstractController
     /**
      * @Route("/stages", name="prostages_stages")
      */
-    public function stages(StageRepository $repositoryStage): Response
+    public function stages(StageRepository $repositoryStage)
     {
-      //On récupère les entreprises de la BD
+      //On récupère les stages de la BD
       $stages = $repositoryStage->findAll();
         return $this->render('prostages/stages.html.twig',
       [
@@ -60,6 +60,35 @@ class ProstagesController extends AbstractController
       ]
     );
     }
+
+    /**
+     * @Route("/stages/{entreprise}", name="prostages_stagesParEntreprise")
+     */
+    public function stagesParEntreprise(StageRepository $repositoryStage, $entreprise): Response
+    {
+      //On récupère les stages de la BD correspondant à l'entreprise
+      $stages = $repositoryStage->findByEntreprise($entreprise);
+        return $this->render('prostages/stages.html.twig',
+      [
+        'stages'=>$stages
+      ]
+    );
+    }
+
+    /**
+     * @Route("/stages/{formation}", name="prostages_stagesParFormation")
+     */
+    public function stagesParFormation(StageRepository $repositoryStage, $formation): Response
+    {
+      //On récupère les stages de la BD correspondant à l'entreprise
+      $stages = $repositoryStage->findByFormation($formation);
+        return $this->render('prostages/stages.html.twig',
+      [
+        'stages'=>$stages
+      ]
+    );
+    }
+
     /**
      * @Route("/entreprises/{id}", name="prostages_entrepriseId", requirements={"id"="\d{1,4}"})
      */
