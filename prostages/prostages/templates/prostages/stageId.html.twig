@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+{% block contenu %}
+<h1>{{stage.intitule}}</h1>
+<div class="card" style="width: 50rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{stage.intitule}}</h5>
+    <p class="card-text">{{stage.description}}</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"><h4>Durée: </h4>{{stage.duree}}</li>
+    <li class="list-group-item"><h4>Compétence requise: </h4>{{stage.competencesRequises}}</li>
+    <li class="list-group-item"><h4>Expérience requise: </h4>{{stage.experienceRequise}}</li>
+    <li class="list-group-item"><h4>Entreprise: </h4><a href="{{path('prostages_entrepriseId',{'id':stage.entreprise.id})}}">{{stage.entreprise.nom}}</a></li>
+    <li class="list-group-item"><h4>Formation: </h4><a href="{{path('prostages_formationId',{'id':stage.Formation.id})}}">{{stage.Formation.intitule}}</a></li>
+  </ul>
+</div>
+{% endblock %}

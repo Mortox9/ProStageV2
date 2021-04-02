@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+{% block contenu %}
+<h1>{{formation.intitule}}</h1>
+<div class="card" style="width: 50rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{formation.intitule}}</h5>
+    <p class="card-text">{{formation.description}}</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    {% for stageCourant in formation.stages %}
+    <li class="list-group-item"><a href="{{path('prostages_stageId',{'id':stageCourant.id})}}">{{stageCourant.intitule}}</a></li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

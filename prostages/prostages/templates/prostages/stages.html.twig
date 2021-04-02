@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+{% block contenu %}
+<h1>Cette page affichera la liste des stages proposés</h1>
+<table class="table table-light table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Nom Entreprise</th>
+      <th scope="col">Formation</th>
+      <th scope="col">Nom du Stage</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for stageCourant in stages %}
+    <tr class="table-light">
+      <th scope="row"">
+      <a href="{{path('prostages_entrepriseId',{'id':stageCourant.entreprise.id})}}" class="nav-link">{{stageCourant.entreprise.nom}}</a>
+      </td>
+      <td class="table-light">
+      <a class="nav-link" href="{{path('prostages_formationId',{id:stageCourant.Formation.id})}}">{{stageCourant.Formation.intitule}}</a>
+      </td>
+      <td class="table-light">
+      <a class="nav-link" href="{{path('prostages_stageId',{id:stageCourant.id})}}">{{stageCourant.intitule}}</a>
+      </td>
+    </tr>
+    {% endfor %}
+
+
+  </tbody>
+</table>
+{% endblock %}

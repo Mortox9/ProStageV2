@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+{% block contenu %}
+<h1>{{entreprise.nom}}</h1>
+<div class="card" style="width: 50rem;">
+  <img src="{{entreprise.photo}}" class="card-img-top" alt="Image {{entreprise.nom}}">
+  <div class="card-body">
+    <h5 class="card-title">{{entreprise.nom}}</h5>
+    <p class="card-text">{{entreprise.milieu}}</p>
+    <p class="card-text">{{entreprise.adresse}}</p>
+    <p class="card-text">{{entreprise.telephone}}</p>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Stages proposés:</h5>
+    {% for stageCourant in entreprise.stages %}
+    <p class="card-text"><a href="{{path('prostages_stageId',{'id':stageCourant.id})}}" class="btn btn-primary">{{stageCourant.intitule}}</a></p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
