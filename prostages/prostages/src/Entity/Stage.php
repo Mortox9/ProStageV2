@@ -144,8 +144,8 @@ class Stage
 
         return $this;
     }
-
-    public function getFormation(): Collection
+    
+    public function getFormation()
     {
         return $this->Formation;
     }
