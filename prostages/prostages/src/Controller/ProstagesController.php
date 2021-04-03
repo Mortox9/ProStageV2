@@ -13,6 +13,7 @@ use App\Repository\FormationRepository;
 use App\Repository\EntrepriseRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Persistence\ObjectManager;
+use App\Form\EntrepriseType;
 
 class ProstagesController extends AbstractController
 {
@@ -30,17 +31,11 @@ class ProstagesController extends AbstractController
     public function ajouterEntreprise(ObjectManager $manager, Request $request)
     {
       $entreprise = new Entreprise();
-      $formulaireEntreprise = $this->createFormBuilder($entreprise)
-      ->add('nom')
-      ->add('adresse')
-      ->add('milieu')
-      ->add('telephone')
-      ->add('photo')
-      ->getForm();
+      $formulaireEntreprise = $this->createForm(EntrepriseType::class, $entreprise);
 
       $formulaireEntreprise->handleRequest($request);
 
-      if($formulaireEntreprise->isSubmitted())
+      if($formulaireEntreprise->isSubmitted() && $formulaireEntreprise->isValid())
       {
         $manager->persist($entreprise);
         $manager->flush();
@@ -61,17 +56,11 @@ class ProstagesController extends AbstractController
      */
     public function modifierEntreprise(ObjectManager $manager, Request $request, Entreprise $entreprise)
     {
-      $formulaireEntreprise = $this->createFormBuilder($entreprise)
-      ->add('nom')
-      ->add('adresse')
-      ->add('milieu')
-      ->add('telephone')
-      ->add('photo')
-      ->getForm();
+      $formulaireEntreprise = $this->createForm(EntrepriseType::class, $entreprise);
 
       $formulaireEntreprise->handleRequest($request);
 
-      if($formulaireEntreprise->isSubmitted())
+      if($formulaireEntreprise->isSubmitted() && $formulaireEntreprise->isValid())
       {
         $manager->persist($entreprise);
         $manager->flush();

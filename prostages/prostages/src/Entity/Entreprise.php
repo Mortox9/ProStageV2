@@ -6,6 +6,7 @@ use App\Repository\EntrepriseRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=EntrepriseRepository::class)
@@ -21,6 +22,10 @@ class Entreprise
 
     /**
      * @ORM\Column(type="string", length=150)
+     * @Assert\Length(
+     *      min = 4,
+     *      minMessage = "Le nom de l'entreprise doit faire au moins {{ limit }} caractères."
+     * )
      */
     private $nom; //Nom de l'Entreprise
 
@@ -31,6 +36,15 @@ class Entreprise
 
     /**
      * @ORM\Column(type="string", length=150)
+     * @Assert\NotBlank(
+     *    message = "Cette valeur ne doit pas être vide."
+     * @Assert\Regex(pattern="/^\b[1-9]{1}[0-9]{0,3}\b/",
+     *               message="Le numéro de la rue semble incorrect")
+     * @Assert\Regex(pattern="/(allée|avenue|rue|boulevard|impasse|cours|passage|route)/",
+     *               message="Le type de route/voie semble incorrect")
+     * @Assert\Regex(pattern="/\b((0[1-9])|([1-8][0-9])|(9[0-8]))[0-9]{3}\b/",
+     *               message="Il semble y avoir un problème avec le code postal")
+     *)
      */
     private $milieu;  //Milieu de l'Entreprise
 
@@ -41,6 +55,9 @@ class Entreprise
 
     /**
      * @ORM\Column(type="string", length=150, nullable=true)
+     * @Assert\Url(
+     *    message = "Cette valeur n'est pas une URL valide."
+     * )
      */
     private $photo; //Url de la photo de l'Entreprise
 

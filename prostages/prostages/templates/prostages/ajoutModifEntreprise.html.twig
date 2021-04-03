@@ -10,9 +10,7 @@
 {{form_start(vueFormulaire)}}
 
 <div>
-  {{form_label(vueFormulaire.nom)}}
-  {{form_errors(vueFormulaire.nom)}}
-  {{form_widget(vueFormulaire.nom, {'attr':{'placeholder':"Nom de l'entreprise"}})}}
+  {{form_row(vueFormulaire.nom, {'attr':{'novalidate':'novalidate'}})}}
 </div>
 <div>
   {{form_label(vueFormulaire.adresse)}}

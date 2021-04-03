@@ -12,7 +12,7 @@
         <h5 class="card-title">{{entrepriseCourtante.nom}}</h5>
         <p class="card-text">{{entrepriseCourtante.adresse}}</p>
         <p class="card-text"><small class="text-muted">{{entrepriseCourtante.telephone}}</small></p>
-        <a href="{{path('prostages_entrepriseId',{'id':entrepriseCourtante.id})}}" class="btn btn-primary">Voir l'entreprise</a>
+        <a href="{{path('prostages_entrepriseId',{'id':entrepriseCourtante.id})}}" class="btn btn-primary">Voir l'entreprise</a> <a href="{{path('prostages_modifEntreprise',{'id':entrepriseCourtante.id})}}" class="btn btn-success">Modifier l'entreprise</a>
       </div>
     </div>
   </div>
