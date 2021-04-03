@@ -11,6 +11,8 @@ use App\Entity\Entreprise;
 use App\Repository\StageRepository;
 use App\Repository\FormationRepository;
 use App\Repository\EntrepriseRepository;
+use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Persistence\ObjectManager;
 
 class ProstagesController extends AbstractController
 {
@@ -21,6 +23,70 @@ class ProstagesController extends AbstractController
     {
         return $this->render('prostages/index.html.twig');
     }
+
+    /**
+     * @Route("/entreprises/ajouter", name="prostages_ajoutEntreprise")
+     */
+    public function ajouterEntreprise(ObjectManager $manager, Request $request)
+    {
+      $entreprise = new Entreprise();
+      $formulaireEntreprise = $this->createFormBuilder($entreprise)
+      ->add('nom')
+      ->add('adresse')
+      ->add('milieu')
+      ->add('telephone')
+      ->add('photo')
+      ->getForm();
+
+      $formulaireEntreprise->handleRequest($request);
+
+      if($formulaireEntreprise->isSubmitted())
+      {
+        $manager->persist($entreprise);
+        $manager->flush();
+
+        return $this->redirectToRoute('prostages_accueil');
+      }
+      //Afficher la page du formulaire d'ajout d'entreprise
+        return $this->render('prostages/ajoutModifEntreprise.html.twig',
+      [
+        'vueFormulaire'=>$formulaireEntreprise->createView(),
+        'action'=>"ajouter"
+      ]
+    );
+    }
+
+    /**
+     * @Route("/entreprises/modifier/{id}", name="prostages_modifEntreprise")
+     */
+    public function modifierEntreprise(ObjectManager $manager, Request $request, Entreprise $entreprise)
+    {
+      $formulaireEntreprise = $this->createFormBuilder($entreprise)
+      ->add('nom')
+      ->add('adresse')
+      ->add('milieu')
+      ->add('telephone')
+      ->add('photo')
+      ->getForm();
+
+      $formulaireEntreprise->handleRequest($request);
+
+      if($formulaireEntreprise->isSubmitted())
+      {
+        $manager->persist($entreprise);
+        $manager->flush();
+
+        return $this->redirectToRoute('prostages_accueil');
+      }
+      //Afficher la page du formulaire d'ajout d'entreprise
+        return $this->render('prostages/ajoutModifEntreprise.html.twig',
+      [
+        'vueFormulaire'=>$formulaireEntreprise->createView(),
+        'action'=>"modifier"
+      ]
+    );
+    }
+
     /**
      * @Route("/entreprises", name="prostages_entreprises")
      */

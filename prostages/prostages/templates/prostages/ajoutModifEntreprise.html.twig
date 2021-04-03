@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+{% block contenu %}
+{% if action == "ajouter" %}
+<h1>Formulaire pour ajouter une entreprise</h1>
+{% else %}
+<h1>Formulaire pour modifier une entreprise</h1>
+{% endif %}
+
+
+{{form_start(vueFormulaire)}}
+
+<div>
+  {{form_label(vueFormulaire.nom)}}
+  {{form_errors(vueFormulaire.nom)}}
+  {{form_widget(vueFormulaire.nom, {'attr':{'placeholder':"Nom de l'entreprise"}})}}
+</div>
+<div>
+  {{form_label(vueFormulaire.adresse)}}
+  {{form_errors(vueFormulaire.adresse)}}
+  {{form_widget(vueFormulaire.adresse, {'attr':{'placeholder':"Adresse de l'entreprise"}})}}
+</div>
+<div>
+  {{form_label(vueFormulaire.milieu)}}
+  {{form_errors(vueFormulaire.milieu)}}
+  {{form_widget(vueFormulaire.milieu, {'attr':{'placeholder':"Milieu de l'entreprise"}})}}
+</div>
+<div>
+  {{form_label(vueFormulaire.telephone)}}
+  {{form_errors(vueFormulaire.telephone)}}
+  {{form_widget(vueFormulaire.telephone, {'attr':{'placeholder':"Telephone de l'entreprise"}})}}
+</div>
+<div>
+  {{form_label(vueFormulaire.photo)}}
+  {{form_errors(vueFormulaire.photo)}}
+  {{form_widget(vueFormulaire.photo, {'attr':{'placeholder':"URL photo d'entreprise"}})}}
+</div>
+<br>
+<div>
+  <button type="submit" class="btn btn-secondary">Enregistrer</button>
+</div>
+
+{{form_end(vueFormulaire)}}
+{% endblock %}
