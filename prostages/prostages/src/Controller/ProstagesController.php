@@ -13,6 +13,7 @@ use App\Repository\FormationRepository;
 use App\Repository\EntrepriseRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Persistence\ObjectManager;
+use App\Form\StageType;
 use App\Form\EntrepriseType;
 
 class ProstagesController extends AbstractController
@@ -23,6 +24,32 @@ class ProstagesController extends AbstractController
     public function index(): Response
     {
         return $this->render('prostages/index.html.twig');
+    }
+
+    /**
+     * @Route("/stages/ajouter", name="prostages_ajoutStage")
+     */
+    public function ajouterStage(ObjectManager $manager, Request $request)
+    {
+      $stage = new Stage();
+      $formulaireStage = $this->createForm(StageType::class, $stage);
+
+      $formulaireStage->handleRequest($request);
+
+      if($formulaireStage->isSubmitted() && $formulaireStage->isValid())
+      {
+        $manager->persist($stage);
+        $manager->flush();
+
+        return $this->redirectToRoute('prostages_accueil');
+      }
+      //Afficher la page du formulaire d'ajout d'entreprise
+        return $this->render('prostages/ajoutStage.html.twig',
+      [
+        'vueFormulaire'=>$formulaireStage->createView(),
+        'action'=>"ajouter"
+      ]
+    );
     }
 
     /**

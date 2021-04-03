@@ -31,6 +31,12 @@ class Entreprise
 
     /**
      * @ORM\Column(type="string", length=150)
+     * @Assert\Regex(pattern="/^\b[1-9]{1}[0-9]{0,3}\b/",
+     *               message="Le numéro de la rue semble incorrect")
+     * @Assert\Regex(pattern="/(allée|avenue|rue|boulevard|impasse|cours|passage|route)/",
+     *               message="Le type de route/voie semble incorrect")
+     * @Assert\Regex(pattern="/\b((0[1-9])|([1-8][0-9])|(9[0-8]))[0-9]{3}\b/",
+     *               message="Il semble y avoir un problème avec le code postal")
      */
     private $adresse; //Adresse de l'Entreprise
 
@@ -38,12 +44,6 @@ class Entreprise
      * @ORM\Column(type="string", length=150)
      * @Assert\NotBlank(
      *    message = "Cette valeur ne doit pas être vide."
-     * @Assert\Regex(pattern="/^\b[1-9]{1}[0-9]{0,3}\b/",
-     *               message="Le numéro de la rue semble incorrect")
-     * @Assert\Regex(pattern="/(allée|avenue|rue|boulevard|impasse|cours|passage|route)/",
-     *               message="Le type de route/voie semble incorrect")
-     * @Assert\Regex(pattern="/\b((0[1-9])|([1-8][0-9])|(9[0-8]))[0-9]{3}\b/",
-     *               message="Il semble y avoir un problème avec le code postal")
      *)
      */
     private $milieu;  //Milieu de l'Entreprise

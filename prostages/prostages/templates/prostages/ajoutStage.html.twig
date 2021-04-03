@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+{% block contenu %}
+<h1>Formulaire pour ajouter un stage</h1>
+
+
+{{form_start(vueFormulaire)}}
+
+<div>
+  {{form_row(vueFormulaire.intitule, {'attr':{'novalidate':'novalidate'}})}}
+</div>
+<div>
+  {{form_row(vueFormulaire.description, {'attr':{'novalidate':'novalidate'}})}}
+</div>
+<div>
+  {{form_row(vueFormulaire.competencesRequises, {'attr':{'novalidate':'novalidate'}})}}
+</div>
+<div>
+  {{form_row(vueFormulaire.experienceRequise, {'attr':{'novalidate':'novalidate'}})}}
+</div>
+<div>
+  {{form_row(vueFormulaire.duree, {'attr':{'novalidate':'novalidate'}})}}
+</div>
+<div>
+  {{form_row(vueFormulaire.entreprise, {'attr':{'novalidate':'novalidate'}})}}
+</div>
+<div>
+  {{form_row(vueFormulaire.Formation, {'attr':{'novalidate':'novalidate'}})}}
+</div>
+<br>
+<div>
+  <button type="submit" class="btn btn-secondary">Enregistrer</button>
+</div>
+
+{{form_end(vueFormulaire)}}
+{% endblock %}

@@ -2,7 +2,11 @@
 
 namespace App\Entity;
 
+use App\Entity\Formation;
 use App\Repository\StageRepository;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -58,6 +62,11 @@ class Stage
      * @ORM\JoinColumn(nullable=false)
      */
     private $entreprise;  //Entreprise qui propose le Stage
+
+    public function __construct()
+    {
+      $this->Formation = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -136,7 +145,7 @@ class Stage
         return $this;
     }
 
-    public function getFormation(): ?Formation
+    public function getFormation(): Collection
     {
         return $this->Formation;
     }
